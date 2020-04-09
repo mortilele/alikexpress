@@ -3,6 +3,8 @@ import {ProductService} from '../product.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Review} from '../review';
 import {ReviewService} from '../review.service';
+import {AuthService} from '../auth.service';
+import {OrderService} from '../order.service';
 
 @Component({
   selector: 'app-product-detail',
@@ -12,13 +14,16 @@ import {ReviewService} from '../review.service';
 export class ProductDetailComponent implements OnInit {
   product;
   ratingsOverview;
+  quantity = 1;
   newReview = new Review();
 
   constructor(
     private route: ActivatedRoute,
     public router: Router,
     private productService: ProductService,
-    private reviewService: ReviewService
+    private reviewService: ReviewService,
+    private authService: AuthService,
+    private orderService: OrderService
   ) { }
 
   ngOnInit(): void {
@@ -65,5 +70,22 @@ export class ProductDetailComponent implements OnInit {
           btn.style.color = '#ffffff';
         }
       );
+  }
+
+  addProductToCard() {
+    if (this.authService.loggedIn()) {
+      const body = {
+        product: this.product.id,
+        quantity: this.quantity
+      };
+      console.log(body);
+      this.orderService.addProductToCart(body)
+        .subscribe(
+          response => console.log(response),
+          error => console.log(error)
+        );
+    } else {
+      alert('Вам нужно войти');
+    }
   }
 }

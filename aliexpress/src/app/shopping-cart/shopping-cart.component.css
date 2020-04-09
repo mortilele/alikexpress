@@ -50,11 +50,9 @@
 }
 
 .cart-total {
+  padding-right: 10px;
   align-items: center;
   float: right;
 }
 
-.cart-total h5 span {
-  color: #2073d4;
-}
 

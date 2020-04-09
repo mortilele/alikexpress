@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {ProductService} from '../product.service';
+import {AuthService} from '../auth.service';
+import {OrderService} from '../order.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-shopping-cart',
@@ -7,17 +10,46 @@ import {ProductService} from '../product.service';
   styleUrls: ['./shopping-cart.component.css']
 })
 export class ShoppingCartComponent implements OnInit {
-  products;
+  cartItems;
+  user;
   constructor(
-    private productService: ProductService
+    private orderService: OrderService,
+    private authService: AuthService,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
-    this.getProducts();
+    this.getCartItems();
+    this.getUser();
   }
 
-  getProducts() {
-    this.productService.getProducts().subscribe(products => this.products = products);
+  getCartItems() {
+    this.orderService.getCartItems().subscribe(response => this.cartItems = response);
+  }
+
+  calculateTotal() {
+    let total = 0;
+    for (const item of this.cartItems.items) {
+      total += (item.product.has_discount) ? (item.product.price_with_discount * item.quantity) : (item.product.price * item.quantity);
+    }
+    return total;
+  }
+
+  getUser() {
+    this.authService.getUserData().subscribe(user => this.user = user);
+  }
+
+  addOrder() {
+    const body = {
+      delivery_address: this.user.profile.address
+    };
+    this.orderService.createOrder(body)
+      .subscribe(
+        response => {
+          this.router.navigate(['/profile']);
+        },
+        error => console.log(error)
+      );
   }
 
 }

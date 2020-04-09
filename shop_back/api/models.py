@@ -119,11 +119,15 @@ class Order(models.Model):
                               verbose_name='Заказчик',
                               blank=True,
                               null=True)
-    delivery_address = models.TextField(default='Home')
+    delivery_address = models.TextField()
+    status = models.CharField(default='In process', max_length=100)
 
     @property
     def total_price(self):
-        return self.items.aggregate(Sum('total_price'))
+        total = 0
+        for item in self.items.all():
+            total += item.total_price
+        return total
 
 
 class UserPersonalCart(models.Model):
@@ -136,6 +140,13 @@ class UserPersonalCart(models.Model):
                                  related_name='cart',
                                  blank=True,
                                  null=True)
+
+    @property
+    def total_price(self):
+        total = 0
+        for item in self.items.all():
+            total += item.total_price
+        return total
 
 
 class CartItem(models.Model):

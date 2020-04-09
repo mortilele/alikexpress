@@ -6,6 +6,7 @@ import {ProductDetailComponent} from './product-detail/product-detail.component'
 import {ShoppingCartComponent} from './shopping-cart/shopping-cart.component';
 import {LoginComponent} from './login/login.component';
 import {RegisterComponent} from './register/register.component';
+import {AuthGuard} from './auth.guard';
 
 
 const routes: Routes = [
@@ -13,9 +14,10 @@ const routes: Routes = [
   { path: '', component: HomepageComponent},
   { path: 'store/:id', component: ProductListComponent},
   { path: 'store/products/:id', component: ProductDetailComponent},
-  { path: 'cart', component: ShoppingCartComponent},
+  { path: 'cart', component: ShoppingCartComponent, canActivate: [AuthGuard]},
   { path: 'register', component: RegisterComponent},
-  { path: 'login', component: LoginComponent}
+  { path: 'login', component: LoginComponent},
+  { path: 'profile', component: ShoppingCartComponent}
 ];
 
 @NgModule({

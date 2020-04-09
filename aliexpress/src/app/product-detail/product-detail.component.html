@@ -59,17 +59,14 @@
           <div class="product_count">
             <label for="qty">Количество:</label>
             <input
+              [(ngModel)]="quantity"
               type="number"
-              name="qty"
-              id="sst"
-              maxlength="12"
-              value="1"
-              title="Quantity:"
+              id="qty"
               class="input-text qty"
             />
           </div>
           <div class="card_area">
-            <a class="main_btn btn-blue" href="#">Добавить в корзину</a>
+            <a class="main_btn btn-blue" (click)="addProductToCard()">Добавить в корзину</a>
             <a class="icon_btn" (click)="addLike($event)">
               {{product.likes}} <i>♥</i>
             </a>

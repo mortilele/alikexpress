@@ -1,6 +1,7 @@
 from django.conf import settings
 from rest_framework import serializers
-from .models import Product, Category, ProductImage, ProductReview, ProductSpecification, Fabricator
+from .models import Product, Category, ProductImage, ProductReview, ProductSpecification, Fabricator, \
+    UserPersonalCart, CartItem, Order
 
 
 class FabricatorSerializer(serializers.ModelSerializer):
@@ -56,3 +57,34 @@ class ProductSerializer(serializers.ModelSerializer):
         model = Product
         fields = '__all__'
 
+
+class CartItemCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CartItem
+        fields = ('product', 'quantity')
+
+
+class CartItemSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CartItem
+        fields = ('product', 'quantity', 'total_price')
+    product = ProductListSerializer()
+
+
+class ShippingCartSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserPersonalCart
+        fields = ('items', 'total_price' )
+    items = CartItemSerializer(many=True)
+
+
+class OrderCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Order
+        fields = ('delivery_address', )
+
+
+class OrderSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Order
+        fields = ('id', 'total_price', 'delivery_address', 'status')

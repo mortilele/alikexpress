@@ -26,8 +26,8 @@ export class RegisterComponent implements OnInit {
       username: this.username,
       email: this.email,
       password: this.password,
-      firstname: this.firstname,
-      lastname: this.lastname
+      first_name: this.firstname,
+      last_name: this.lastname
     };
     this.authService.registerUser(registerUserData)
       .subscribe(

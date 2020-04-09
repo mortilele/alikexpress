@@ -5,8 +5,9 @@
     </a>
     <a *ngFor="let category of categories" [routerLink]="['/store', category.id]">{{category.name}}</a>
     <a [routerLink]="['/login']" *ngIf="!authService.loggedIn()" class="button fancy-button"><i class="material-icons">account_circle</i> Войти</a>
-    <a [routerLink]="['/cart']" *ngIf="authService.loggedIn()" class="button fancy-button"><i class="material-icons">shopping_cart</i> Корзина</a>
-    <a (click)="authService.logoutUser()" *ngIf="authService.loggedIn()" class="button fancy-button"><i class="material-icons">account_circle</i> Выйти</a>
+    <a [routerLink]="['/cart']" *ngIf="authService.loggedIn()" class="button fancy-button"><i class="material-icons">shopping_cart</i></a>
+    <a [routerLink]="['/profile']" *ngIf="authService.loggedIn()" class="button fancy-button"><i class="material-icons">account_circle</i></a>
+    <a (click)="authService.logoutUser()" *ngIf="authService.loggedIn()" class="button fancy-button"><i class="material-icons">exit_to_app</i></a>
     <a href="javascript:void(0);" class="icon" id="hamburger">
       <i class="fa fa-bars"></i>
     </a>

@@ -46,4 +46,9 @@ export class AuthService {
     const id = this.getUserId();
     return this.http.get(this.userUrl + id + '/');
   }
+
+  changeUserData(user) {
+    const id = this.getUserId();
+    return this.http.put(this.userUrl + id + '/', user);
+  }
 }

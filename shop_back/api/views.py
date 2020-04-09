@@ -3,11 +3,13 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import OrderingFilter
 from rest_framework.decorators import action
 
-from .models import Product, Category, Fabricator, ProductReview
+from .models import Product, Category, Fabricator, ProductReview, CartItem, UserPersonalCart, Order
 from .serializers import ProductSerializer, CategorySerializer, ProductListSerializer, \
-    FabricatorSerializer, ProductReviewSerializer
+    FabricatorSerializer, ProductReviewSerializer, CartItemSerializer, ShippingCartSerializer, CartItemCreateSerializer, \
+    OrderCreateSerializer, OrderSerializer
 from rest_framework import viewsets, status, mixins
 from rest_framework.response import Response
+from rest_framework.permissions import IsAuthenticated
 
 
 class ProductViewSet(viewsets.ModelViewSet):
@@ -21,6 +23,30 @@ class ProductViewSet(viewsets.ModelViewSet):
         if self.action == 'retrieve':
             return ProductSerializer
         return self.serializer_class
+
+
+class CartItemViewSet(viewsets.ModelViewSet):
+    queryset = CartItem.objects.all()
+    serializer_class = CartItemSerializer
+
+    def get_serializer_class(self):
+        if self.action == 'create':
+            return CartItemCreateSerializer
+        return self.serializer_class
+
+    def perform_create(self, serializer):
+        serializer.save(cart=self.request.user.cart)
+
+
+class ShippingCartViewSet(viewsets.GenericViewSet,
+                          mixins.ListModelMixin):
+    queryset = UserPersonalCart.objects.all()
+    serializer_class = ShippingCartSerializer
+
+    def list(self, request, *args, **kwargs):
+        cart = self.queryset.get(owner=self.request.user)
+        serializer = self.serializer_class(instance=cart)
+        return Response(serializer.data)
 
 
 class CategoryViewSet(viewsets.ModelViewSet):
@@ -37,6 +63,27 @@ class FabricatorViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         result = super().get_queryset()
         return result.distinct()
+
+
+class OrderViewSet(viewsets.ModelViewSet):
+    queryset = Order.objects.all()
+    serializer_class = OrderSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get_serializer_class(self):
+        if self.action == 'create':
+            return OrderCreateSerializer
+        return self.serializer_class
+
+    def list(self, request, *args, **kwargs):
+        queryset = self.queryset.filter(owner=self.request.user)
+        serializer = self.serializer_class(queryset, many=True)
+        return Response(serializer.data)
+
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user,
+                        items=self.request.user.cart.items.all())
+        self.request.user.cart.items.all().update(cart=None)
 
 
 class ProductReviewViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):

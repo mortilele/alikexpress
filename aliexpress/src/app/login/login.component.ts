@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
         response => {
           localStorage.setItem('token', response.token);
           localStorage.setItem('id', response.id);
-          this.router.navigate(['/cart']);
+          this.router.navigate(['/profile']);
           console.log(response);
         },
         error => console.log(error)

@@ -1,18 +1,10 @@
-body{
-  background-color: dodgerblue;
-}
-
 .view-account{
   height: 80%;
   color: white;
   border-radius: 50px;
   margin-top: 60px;
-  box-shadow: 100px 100px 100px 100px rgba(0, 0, 0, 0.3);
-  -moz-box-shadow: 100px 100px 100px 100px rgba(0, 0, 0, 0.3);
-  -webkit-box-shadow: 100px 100px 100px 100px rgba(0, 0, 0, 0.3);
-  -o-box-shadow: 100px 100px 100px 100px rgba(0, 0, 0, 0.3);
-  -ms-box-shadow: 100px 100px 100px 100px rgba(0, 0, 0, 0.3);
 }
+
 .name{
   font-size: 20px;
 }
@@ -56,18 +48,6 @@ textarea:-ms-input-placeholder {
   font-family: 'Lato', sans-serif;
   right: 0;
 }
-.btn-success{
-  height: 50px;
-  width: 100px;
-  font-size: 20px;
-  color: #f3f3f3;
-  background-color: #295DC2;
-}
-.btn{
-  background-color: #295DC2;
-  font-family: 'Lato', sans-serif;
-  font-size: 20px;
-}
 .view-account .pro-label {
   font-size: 13px;
   padding: 4px 5px;
@@ -78,7 +58,7 @@ textarea:-ms-input-placeholder {
 }
 
 .view-account .side-bar {
-  padding-bottom: 30px
+  padding-bottom: 30px;
 }
 .actions{
   align-content: center;
@@ -164,8 +144,8 @@ textarea:-ms-input-placeholder {
 }
 
 .view-account .side-bar .side-menu .nav>li.active a {
-  color: #40babd;
-  border-bottom: 2px solid #40babd;
+  color: #2073d4;
+  font-size: 16px;
   background: none;
   border-right: none
 }
@@ -194,7 +174,9 @@ textarea:-ms-input-placeholder {
 }
 
 .view-account .content-panel {
-  padding: 30px
+  padding: 30px;
+  background-color: #f6f6f6;
+
 }
 
 .view-account .content-panel .title {
@@ -278,9 +260,7 @@ textarea:-ms-input-placeholder {
   color: #616670;
   overflow: hidden
 }
-.btn:hover{
-  background-color: dodgerblue;
-}
+
 .view-account .content-panel .mails-wrapper .mail-item>div {
   float: left
 }
@@ -434,7 +414,7 @@ textarea:-ms-input-placeholder {
 }
 
 .drive-wrapper .drive-item-title a:hover {
-  color: #40babd
+  color: #2073d4;
 }
 
 .theme-2 .drive-wrapper .drive-item-title a:hover {
@@ -511,7 +491,7 @@ textarea:-ms-input-placeholder {
 }
 
 .drive-list-view a:hover {
-  color: #40babd
+  color: #2073d4;
 }
 
 .theme-2 .drive-list-view a:hover {
@@ -656,7 +636,7 @@ textarea:-ms-input-placeholder {
   }
   .view-account .side-bar .side-menu .nav>li.active a {
     background: #f9f9fb;
-    border-right: 4px solid #40babd;
+    border-right: 4px solid #2073d4;
     border-bottom: none
   }
   .theme-2 .view-account .side-bar .side-menu .nav>li.active a {

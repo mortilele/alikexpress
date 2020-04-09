@@ -1,0 +1,58 @@
+<section class="cart_area">
+  <div class="container">
+    <div class="cart_inner">
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+          <tr>
+            <th scope="col">Продукт</th>
+            <th scope="col">Цена</th>
+            <th scope="col">Количество</th>
+            <th scope="col">Итого</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let product of products">
+            <td>
+              <div class="media">
+                <div class="d-flex">
+                  <img
+                    src="{{product.image}}"
+                    alt=""
+                  />
+                </div>
+                <div class="media-body">
+                  <p>{{product.name}}</p>
+                </div>
+              </div>
+            </td>
+            <td>
+              <h5>{{product.price}}</h5>
+            </td>
+            <td>
+              <div class="product_count">
+                <input
+                  type="text"
+                  name="qty"
+                  id="sst"
+                  maxlength="12"
+                  value="1"
+                  title="Quantity:"
+                  class="input-text qty"
+                />
+              </div>
+            </td>
+            <td>
+              <h5>{{product.price}}</h5>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+        <div class="cart-total">
+          <h5>Итоговая цена:  <span>22323232</span> тг </h5>
+          <a class="main_btn btn-blue" href="#">Оформить заказ</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,270 @@
+<div class="product_image_area">
+  <div class="container">
+    <div class="row s_product_inner">
+      <div class="col-lg-6">
+        <div class="s_product_img">
+          <div
+            id="carouselExampleIndicators"
+            class="carousel slide"
+            data-ride="carousel"
+          >
+            <ol class="carousel-indicators">
+              <li *ngFor="let image of product.images; let index=index"
+                  [attr.data-slide-to]="index"
+                  data-target="#carouselExampleIndicators"
+                  [class.active]="index===0"
+              >
+                <img
+                  src="{{image.src}}"
+                  alt=""
+                />
+              </li>
+            </ol>
+            <div class="carousel-inner">
+              <div class="carousel-item" *ngFor="let image of product.images; let index=index"
+                  [class.active]="index===0"
+              >
+                <img
+                  class="d-block w-100 h-200"
+                  src="{{image.src}}"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-5 offset-lg-1">
+        <div class="s_product_text">
+          <h3>{{product.name}}</h3>
+          <h2 *ngIf="product.has_discount === false">{{product.price}}тг</h2>
+          <h2 *ngIf="product.has_discount">{{product.price_with_discount}}тг</h2>
+          <del *ngIf="product.has_discount">{{product.price}}тг</del>
+          <ul class="list">
+            <li>
+              <a class="active" [routerLink]="['/store', product.category.id]">
+                <span>Категория</span> : {{product.category.name}}</a
+              >
+            </li>
+            <li>
+              <a> <span>Производитель</span> : {{product.fabricator.name}}</a>
+            </li>
+            <li>
+              <a *ngIf="product.in_stock"> <span>Есть в наличии?</span> : Да</a>
+              <a *ngIf="product.in_stock!==true"> <span>Есть в наличии?</span> : Нет </a>
+            </li>
+          </ul>
+          <p>
+           {{product.short_description}}
+          </p>
+          <div class="product_count">
+            <label for="qty">Количество:</label>
+            <input
+              type="number"
+              name="qty"
+              id="sst"
+              maxlength="12"
+              value="1"
+              title="Quantity:"
+              class="input-text qty"
+            />
+          </div>
+          <div class="card_area">
+            <a class="main_btn btn-blue" href="#">Добавить в корзину</a>
+            <a class="icon_btn" (click)="addLike($event)">
+              {{product.likes}} <i>♥</i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--================End Single Product Area =================-->
+
+<!--================Product Description Area =================-->
+<section class="product_description_area">
+  <div class="container">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+      <li class="nav-item">
+        <a
+          class="nav-link"
+          id="home-tab"
+          data-toggle="tab"
+          href="#home"
+          role="tab"
+          aria-controls="home"
+          aria-selected="true"
+        >Описание</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          class="nav-link"
+          id="profile-tab"
+          data-toggle="tab"
+          href="#profile"
+          role="tab"
+          aria-controls="profile"
+          aria-selected="false"
+        >Характеристики</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          class="nav-link active"
+          id="review-tab"
+          data-toggle="tab"
+          href="#review"
+          role="tab"
+          aria-controls="review"
+          aria-selected="false"
+        >Отзывы</a
+        >
+      </li>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+      <div
+        class="tab-pane fade"
+        id="home"
+        role="tabpanel"
+        aria-labelledby="home-tab"
+      >
+        <p>
+          {{product.long_description}}
+        </p>
+      </div>
+      <div
+        class="tab-pane fade"
+        id="profile"
+        role="tabpanel"
+        aria-labelledby="profile-tab"
+      >
+        <div class="table-responsive">
+          <table class="table">
+            <tbody>
+            <tr *ngFor="let specification of product.specifications">
+              <td>
+                <h5>{{specification.key}}</h5>
+              </td>
+              <td>
+                <h5>{{specification.value}}</h5>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div
+        class="tab-pane fade show active"
+        id="review"
+        role="tabpanel"
+        aria-labelledby="review-tab"
+      >
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="row total_rate">
+              <div class="col-6">
+                <div class="box_total">
+                  <h5>Средняя оценка</h5>
+                  <h4>{{ratingsOverview.average}}</h4>
+                  <h6>({{ratingsOverview.total}} Отзывов)</h6>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="rating_list">
+                  <h3>Основано на {{ratingsOverview.total}} отзывах</h3>
+                  <ul class="list">
+                    <li *ngFor="let grade of ratingsOverview.distribution">
+                      <a>
+                        {{grade.value}} Star
+                        <i *ngFor="let star of range(statsReviews(ratingsOverview.total, grade.count))" class="fa fa-star"></i>
+                        <i *ngFor="let empty of range(5-statsReviews(ratingsOverview.total, grade.count))" class="fa fa-star-o"></i>
+                        {{grade.count}}
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="review_list">
+              <div class="review_item" *ngFor="let review of product.reviews">
+                <div class="media">
+                  <div class="media-body">
+                    <h4>{{review.user_full_name}}</h4>
+                    <i *ngFor="let star of range(review.grade)" class="fa fa-star"></i>
+                    <i *ngFor="let empty of range(5-review.grade)" class="fa fa-star-o"></i>
+                  </div>
+                </div>
+                <p>
+                  {{review.content}}
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <div class="review_box">
+              <h4>Оставить отзыв</h4>
+              <p>Ваша оценка:</p>
+
+              <div
+                class="row contact_form"
+                id="contactForm"
+              >
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <fieldset class="rating">
+                      <input [(ngModel)]="newReview.grade" type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
+                      <input [(ngModel)]="newReview.grade" type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
+                      <input [(ngModel)]="newReview.grade" type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
+                      <input [(ngModel)]="newReview.grade" type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
+                      <input [(ngModel)]="newReview.grade" type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
+                    </fieldset>
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <input
+                      type="text"
+                      class="form-control"
+                      [(ngModel)]="newReview.user_full_name"
+                      placeholder="Ваше полное имя"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <input
+                      type="email"
+                      class="form-control"
+                      [(ngModel)]="newReview.email"
+                      placeholder="Ваш Email"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-12">
+                  <div class="form-group">
+                        <textarea
+                          class="form-control"
+                          [(ngModel)]="newReview.content"
+                          rows="1"
+                          placeholder="Ваш отзыв"
+                        ></textarea>
+                  </div>
+                </div>
+                <div class="col-md-12 text-right">
+                  <button
+                    (click)="addReview()"
+                    class="btn submit_btn"
+                  >
+                    Отправить отзыв
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

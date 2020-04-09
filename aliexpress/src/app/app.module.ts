@@ -21,6 +21,7 @@ import { RegisterComponent } from './register/register.component';
 import {AuthService} from './auth.service';
 import {AuthGuard} from './auth.guard';
 import {TokenInterceptorService} from './token-interceptor.service';
+import { AccountPageComponent } from './account-page/account-page.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import {TokenInterceptorService} from './token-interceptor.service';
     FooterComponent,
     LoginComponent,
     RegisterComponent,
+    AccountPageComponent,
   ],
   imports: [
     BrowserModule,

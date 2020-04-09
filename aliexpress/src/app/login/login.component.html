@@ -12,29 +12,29 @@
         </span>
         </div>
         <div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-          <input class="input100" type="text" [(ngModel)]="username" placeholder="Username">
+          <input class="input100" type="text" [(ngModel)]="username" placeholder="Имя пользователя">
           <span class="focus-input100-1"></span>
           <span class="focus-input100-2"></span>
         </div>
 
         <div class="wrap-input100 rs1 validate-input" data-validate="Password is required">
-          <input class="input100" type="password" [(ngModel)]="password" name="pass" placeholder="Password">
+          <input class="input100" type="password" [(ngModel)]="password" name="pass" placeholder="Пароль">
           <span class="focus-input100-1"></span>
           <span class="focus-input100-2"></span>
         </div>
 
         <div class="container_login_btn ">
           <button (click)="loginUser()" class="login_form_btn">
-            Sign in
+            Войти
           </button>
         </div>
         <div class="text-center">
 						<span class="txt1">
-							Don't have account?
+							Нет аккаунта?
 						</span>
 
           <a routerLink="/register" routerlinkactive="active" class="txt2 hov1">
-            Register
+            Зарегистрироваться
           </a>
         </div>
       </div>

@@ -42,13 +42,18 @@ a h4:hover {
   color: #2073d4;
 }
 
+input[readonly]{
+  background-color:transparent;
+  border: 0;
+  font-size: 1em;
+}
 
 .main_btn {
   display: inline-block;
   background: #2073d4;
   padding: 0 32px;
   letter-spacing: 0.25px;
-  color: #fff;
+  color: #fff !important;
   font-family: "Roboto",sans-serif;
   font-size: 12px;
   font-weight: 500;
@@ -65,7 +70,7 @@ a h4:hover {
 
 .main_btn:hover{
   background:transparent;
-  color: #2073d4;
+  color: #2073d4 !important;
 }
 
 .btn-blue:hover{

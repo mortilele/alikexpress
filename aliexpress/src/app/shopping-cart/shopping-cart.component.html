@@ -1,6 +1,7 @@
 <section class="cart_area">
   <div class="container">
-    <div class="cart_inner">
+    <h4 *ngIf="!cartItems.items.length"> У вас пока нету заказов </h4>
+    <div *ngIf="cartItems.items.length" class="cart_inner">
       <div class="table-responsive">
         <table class="table">
           <thead>
@@ -12,45 +13,78 @@
           </tr>
           </thead>
           <tbody>
-          <tr *ngFor="let product of products">
+          <tr *ngFor="let item of cartItems.items">
             <td>
               <div class="media">
                 <div class="d-flex">
                   <img
-                    src="{{product.image}}"
+                    src="{{item.product.image}}"
                     alt=""
                   />
                 </div>
                 <div class="media-body">
-                  <p>{{product.name}}</p>
+                  <a [routerLink]="['/store/products', item.product.id]">{{item.product.name}}</a>
                 </div>
               </div>
             </td>
             <td>
-              <h5>{{product.price}}</h5>
+              <h5 *ngIf="item.product.has_discount">{{item.product.price_with_discount}}</h5>
+              <h5 *ngIf="!item.product.has_discount">{{item.product.price}}</h5>
             </td>
             <td>
               <div class="product_count">
                 <input
-                  type="text"
-                  name="qty"
-                  id="sst"
-                  maxlength="12"
-                  value="1"
-                  title="Quantity:"
+                  [(ngModel)]="item.quantity"
+                  type="number"
+                  min="1"
+                  max="20"
+                  value="{{item.quantity}}"
                   class="input-text qty"
                 />
               </div>
             </td>
             <td>
-              <h5>{{product.price}}</h5>
+              <input
+                *ngIf="item.product.has_discount"
+                [(ngModel)]="item.total_price"
+                readonly
+                value="{{item.quantity * item.product.price_with_discount}}"
+                class="form-control"
+              />
+              <input
+                *ngIf="!item.product.has_discount"
+                [(ngModel)]="item.total_price"
+                readonly
+                value="{{item.quantity * item.product.price}}"
+                class="form-control"
+              />
             </td>
           </tr>
           </tbody>
         </table>
-        <div class="cart-total">
-          <h5>Итоговая цена:  <span>22323232</span> тг </h5>
-          <a class="main_btn btn-blue" href="#">Оформить заказ</a>
+        <div class="col-md-6 float-right ">
+          <h4>{{user.username}}</h4>
+          <div class="form-group">
+            <label for="address">Адрес доставки:</label>
+            <input
+              [(ngModel)]="user.profile.address"
+              id="address"
+              required
+              class="form-control"
+            >
+          </div>
+          <div class="form-group">
+            <h5>Итоговая цена: </h5>
+            <input
+              [(ngModel)]="cartItems.total_price"
+              readonly
+              value="{{calculateTotal()}}"
+              class="form-control"
+            />
+          </div>
+          <div class="form-group text-center">
+            <a class="main_btn" (click)="addOrder()">Оформить заказ</a>
+          </div>
         </div>
       </div>
     </div>

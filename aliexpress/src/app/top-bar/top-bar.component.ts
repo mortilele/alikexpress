@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {CategoryService} from '../category.service';
+import {AuthService} from '../auth.service';
 
 @Component({
   selector: 'app-top-bar',
@@ -8,7 +9,10 @@ import {CategoryService} from '../category.service';
 })
 export class TopBarComponent implements OnInit {
   categories: any;
-  constructor(private categoryService: CategoryService) {}
+  constructor(
+    private categoryService: CategoryService,
+    public authService: AuthService
+  ) {}
 
   ngOnInit(): void {
     this.getCategories();

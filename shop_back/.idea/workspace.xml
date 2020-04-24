@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="fc99548c-30a2-44d9-a1c6-e3285d88686b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/authe/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/authe/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-    </list>
+    <list default="true" id="fc99548c-30a2-44d9-a1c6-e3285d88686b" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -132,6 +128,7 @@
       <workItem from="1587569129623" duration="873000" />
       <workItem from="1587625800084" duration="178000" />
       <workItem from="1587725860549" duration="653000" />
+      <workItem from="1587746249744" duration="439000" />
     </task>
     <servers />
   </component>

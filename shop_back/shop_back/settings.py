@@ -148,7 +148,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
-BACKEND_URL = "http://104.248.137.191"
+BACKEND_URL = "http://api.ocenika.com"
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")

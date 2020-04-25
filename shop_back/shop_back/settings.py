@@ -25,7 +25,7 @@ SECRET_KEY = '&9q$a(9fsz#avo^(t_&)we8f^1tr7_i+&)^+c#-p$bu#=#3h&@'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['104.248.137.191']
+ALLOWED_HOSTS = ['104.248.137.191', 'api.ocenika.com']
 
 
 # Application definition

@@ -6,7 +6,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
   providedIn: 'root'
 })
 export class CategoryService {
-  baseUrl = 'http://127.0.0.1:8000';
+  baseUrl = 'http://api.ocenika.com';
   httpHeaders = new HttpHeaders(
     {'Content-Type': 'application/json'}
   );

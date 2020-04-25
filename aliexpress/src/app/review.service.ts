@@ -8,7 +8,7 @@ import {catchError, tap} from 'rxjs/operators';
   providedIn: 'root'
 })
 export class ReviewService {
-  baseUrl = 'http://127.0.0.1:8000';
+  baseUrl = 'http://api.ocenika.com';
   httpHeaders = new HttpHeaders(
     {'Content-Type': 'application/json'}
   );

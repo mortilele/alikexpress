@@ -8,9 +8,9 @@ import {Router} from '@angular/router';
 })
 export class AuthService {
 
-  private registerUrl = 'http://127.0.0.1:8000/api/users/';
-  private loginUrl = 'http://127.0.0.1:8000/authenticate/';
-  private userUrl = 'http://127.0.0.1:8000/api/users/';
+  private registerUrl = 'http://api.ocenika.com/api/users/';
+  private loginUrl = 'http://api.ocenika.com/authenticate/';
+  private userUrl = 'http://api.ocenika.com/api/users/';
   constructor(
     private http: HttpClient,
     private router: Router

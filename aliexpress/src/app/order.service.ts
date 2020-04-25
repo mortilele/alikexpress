@@ -5,9 +5,9 @@ import {HttpClient} from '@angular/common/http';
   providedIn: 'root'
 })
 export class OrderService {
-  private cartItemUrl = 'http://localhost:8000/api/cart-items/';
-  private userCartUrl = 'http://localhost:8000/api/carts/';
-  private orderUrl = 'http://localhost:8000/api/orders/';
+  private cartItemUrl = 'http://api.ocenika.com/api/cart-items/';
+  private userCartUrl = 'http://api.ocenika.com/api/carts/';
+  private orderUrl = 'http://api.ocenika.com/api/orders/';
   constructor(private http: HttpClient) { }
 
   addProductToCart(body) {

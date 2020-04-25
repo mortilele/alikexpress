@@ -1,3 +1,4 @@
+from django.conf.urls import url
 from rest_framework import routers
 from api import views
 from authe.views import UserViewSet
@@ -13,4 +14,9 @@ router.register(r'cart-items', views.CartItemViewSet)
 router.register(r'carts', views.ShippingCartViewSet)
 router.register(r'orders', views.OrderViewSet)
 
-urlpatterns = router.urls
+urlpatterns = [
+    url(r'reviews/like', views.like),
+    url(r'reviews/total_ratings', views.total_ratings)
+]
+
+urlpatterns += router.urls

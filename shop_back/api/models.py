@@ -1,8 +1,6 @@
 from django.db import models
-from django.db.models import Sum
 from utils.file_upload import image_path
 from django.contrib.auth.models import User
-from datetime import datetime, timedelta
 
 
 class Category(models.Model):

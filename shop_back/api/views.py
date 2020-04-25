@@ -1,4 +1,7 @@
+import json
+
 from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import OrderingFilter
 from rest_framework.decorators import action
@@ -6,7 +9,7 @@ from rest_framework.decorators import action
 from .models import Product, Category, Fabricator, ProductReview, CartItem, UserPersonalCart, Order
 from .serializers import ProductSerializer, CategorySerializer, ProductListSerializer, \
     FabricatorSerializer, ProductReviewSerializer, CartItemSerializer, ShippingCartSerializer, CartItemCreateSerializer, \
-    OrderCreateSerializer, OrderSerializer
+    OrderCreateSerializer, OrderSerializer, LikeSerializer
 from rest_framework import viewsets, status, mixins
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
@@ -28,6 +31,7 @@ class ProductViewSet(viewsets.ModelViewSet):
 class CartItemViewSet(viewsets.ModelViewSet):
     queryset = CartItem.objects.all()
     serializer_class = CartItemSerializer
+    permission_classes = [IsAuthenticated]
 
     def get_serializer_class(self):
         if self.action == 'create':
@@ -42,6 +46,7 @@ class ShippingCartViewSet(viewsets.GenericViewSet,
                           mixins.ListModelMixin):
     queryset = UserPersonalCart.objects.all()
     serializer_class = ShippingCartSerializer
+    permission_classes = [IsAuthenticated]
 
     def list(self, request, *args, **kwargs):
         cart = self.queryset.get(owner=self.request.user)
@@ -49,7 +54,7 @@ class ShippingCartViewSet(viewsets.GenericViewSet,
         return Response(serializer.data)
 
 
-class CategoryViewSet(viewsets.ModelViewSet):
+class CategoryViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
 
@@ -90,21 +95,25 @@ class ProductReviewViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
     queryset = ProductReview.objects.all()
     serializer_class = ProductReviewSerializer
 
-    @action(detail=False, methods=['post'])
-    def like(self, request):
+
+@csrf_exempt
+def like(request):
+    if request.method == 'POST':
         try:
-            product_id = self.request.data['product']
-            product = Product.objects.get(id=product_id)
-            product.likes += 1
-            product.save()
-            return Response({'code': '0'})
+            body = json.loads(request.body)
+            serializer = LikeSerializer(data=body)
+            if serializer.is_valid(raise_exception=True):
+                serializer.save()
+                return JsonResponse({'code': '0'})
         except Exception as e:
             print(str(e))
+            return JsonResponse({'code': '2'})
 
-    @action(detail=False, methods=['get'])
-    def total_ratings(self, request):
-        product_id = self.request.query_params['product']
-        product_reviews = ProductReview.objects.filter(product_id = product_id)
+
+def total_ratings(request):
+    if request.method == 'GET':
+        product_id = request.GET['product']
+        product_reviews = ProductReview.objects.filter(product_id=product_id)
         ones = product_reviews.filter(grade=1).count()
         twos = product_reviews.filter(grade=2).count()
         threes = product_reviews.filter(grade=3).count()

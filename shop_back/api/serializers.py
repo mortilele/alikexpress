@@ -28,10 +28,9 @@ class ProductSpecificationSerializer(serializers.ModelSerializer):
         fields = ('key', 'value')
 
 
-class CategorySerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Category
-        fields = '__all__'
+class CategorySerializer(serializers.Serializer):
+    id = serializers.IntegerField()
+    name = serializers.CharField()
 
 
 class ProductListSerializer(serializers.ModelSerializer):
@@ -68,23 +67,36 @@ class CartItemSerializer(serializers.ModelSerializer):
     class Meta:
         model = CartItem
         fields = ('product', 'quantity', 'total_price')
+
     product = ProductListSerializer()
 
 
 class ShippingCartSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserPersonalCart
-        fields = ('items', 'total_price' )
+        fields = ('items', 'total_price')
+
     items = CartItemSerializer(many=True)
 
 
 class OrderCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Order
-        fields = ('delivery_address', )
+        fields = ('delivery_address',)
 
 
 class OrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = Order
         fields = ('id', 'total_price', 'delivery_address', 'status')
+
+
+class LikeSerializer(serializers.Serializer):
+    product = serializers.IntegerField()
+
+    def create(self, validated_data):
+        product_id = validated_data['product']
+        product = Product.objects.get(id=product_id)
+        product.likes += 1
+        product.save()
+        return 0

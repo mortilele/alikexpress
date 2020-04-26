@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="fc99548c-30a2-44d9-a1c6-e3285d88686b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/authe/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/authe/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shop_back/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/shop_back/settings.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -138,6 +138,7 @@
       <workItem from="1587825984161" duration="557000" />
       <workItem from="1587828018903" duration="69000" />
       <workItem from="1587828527126" duration="95000" />
+      <workItem from="1587883596964" duration="29000" />
     </task>
     <servers />
   </component>
@@ -173,10 +174,10 @@
       <screen x="0" y="27" width="1920" height="1005" />
     </state>
     <state x="616" y="357" key="com.intellij.ide.util.TipDialog/0.27.1920.1005@0.27.1920.1005" timestamp="1586340823901" />
-    <state x="608" y="268" width="704" height="522" key="find.popup" timestamp="1586362777253">
+    <state x="608" y="268" width="704" height="522" key="find.popup" timestamp="1587883609747">
       <screen x="0" y="27" width="1920" height="1005" />
     </state>
-    <state x="608" y="268" width="704" height="522" key="find.popup/0.27.1920.1005@0.27.1920.1005" timestamp="1586362777253" />
+    <state x="608" y="268" width="704" height="522" key="find.popup/0.27.1920.1005@0.27.1920.1005" timestamp="1587883609747" />
     <state x="623" y="247" width="672" height="678" key="search.everywhere.popup" timestamp="1586420899907">
       <screen x="0" y="27" width="1920" height="1005" />
     </state>

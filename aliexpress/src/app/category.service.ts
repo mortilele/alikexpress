@@ -6,7 +6,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
   providedIn: 'root'
 })
 export class CategoryService {
-  baseUrl = 'http://api.ocenika.com';
+  baseUrl = 'http://api.alikexpress.solf.io';
   httpHeaders = new HttpHeaders(
     {'Content-Type': 'application/json'}
   );

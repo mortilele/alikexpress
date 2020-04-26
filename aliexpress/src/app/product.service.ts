@@ -7,7 +7,7 @@ import { catchError, map, tap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class ProductService {
-  baseUrl = 'http://api.ocenika.com';
+  baseUrl = 'http://api.alikexpress.solf.io';
   httpHeaders = new HttpHeaders(
     {'Content-Type': 'application/json'}
   );

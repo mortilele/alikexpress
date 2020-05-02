@@ -5,9 +5,9 @@ import {HttpClient} from '@angular/common/http';
   providedIn: 'root'
 })
 export class OrderService {
-  private cartItemUrl = 'http://api.alikexpress.solf.io/api/cart-items/';
-  private userCartUrl = 'http://api.alikexpress.solf.io/api/carts/';
-  private orderUrl = 'http://api.alikexpress.solf.io/api/orders/';
+  private cartItemUrl = 'https://api.alikexpress.solf.io/api/cart-items/';
+  private userCartUrl = 'https://api.alikexpress.solf.io/api/carts/';
+  private orderUrl = 'https://api.alikexpress.solf.io/api/orders/';
   constructor(private http: HttpClient) { }
 
   addProductToCart(body) {

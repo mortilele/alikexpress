@@ -8,7 +8,7 @@ import {catchError, tap} from 'rxjs/operators';
   providedIn: 'root'
 })
 export class ReviewService {
-  baseUrl = 'http://api.alikexpress.solf.io';
+  baseUrl = 'https://api.alikexpress.solf.io';
   httpHeaders = new HttpHeaders(
     {'Content-Type': 'application/json'}
   );

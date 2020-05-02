@@ -8,9 +8,9 @@ import {Router} from '@angular/router';
 })
 export class AuthService {
 
-  private registerUrl = 'http://api.alikexpress.solf.io/api/users/';
-  private loginUrl = 'http://api.alikexpress.solf.io/authenticate/';
-  private userUrl = 'http://api.alikexpress.solf.io/api/users/';
+  private registerUrl = 'https://api.alikexpress.solf.io/api/users/';
+  private loginUrl = 'https://api.alikexpress.solf.io/authenticate/';
+  private userUrl = 'https://api.alikexpress.solf.io/api/users/';
   constructor(
     private http: HttpClient,
     private router: Router
